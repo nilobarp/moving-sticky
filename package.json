@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm exec simple-git-hooks",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -48,11 +50,17 @@
     "*": "prettier --ignore-unknown --write"
   },
   "simple-git-hooks": {
-    "pre-commit": ["pnpm exec lint-staged --concurrent false"],
+    "pre-commit": [
+      "pnpm exec lint-staged --concurrent false"
+    ],
     "commit-msg": "pnpm exec commitlint --edit $1",
-    "pre-push": ["CI=true pnpm test -- --coverage"]
+    "pre-push": [
+      "CI=true pnpm test -- --coverage"
+    ]
   },
-  "eslintIgnore": ["/node_modules"],
+  "eslintIgnore": [
+    "/node_modules"
+  ],
   "engines": {
     "node": ">=20"
   }
